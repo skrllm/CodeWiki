@@ -1,5 +1,5 @@
 # Advices to writing code
-## Naming advices
+## Naming rules
 1) Стоит избегать неявной типизации типа ```var```.
 2) Переменные должны иметь осмысленные названия.  
 **```string Name``` лучше, чем ```var a```.**
