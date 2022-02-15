@@ -68,8 +68,64 @@ private void Keyboard_KeyUp(object sender, KeyRoutedEventArgs e)
 8) Если необходим рефакторинг или реализация фичи, которую в данный момент нет возможности выполнить - необходимо отставить ```TODO``` комментарий.
 9) Необходимо комментировать неочевидные проблемы, которые решает код.
 
+## Formatting rules
+1) Каждый класс, структура, перечисление и т.д. должны находиться в отдельном файле.
+1) Файл не должен превышать 500 строк.
+2) Длинна строки не должна превышать 80 символов.
+4) Перед каждым комментарием, документацией должна быть пустая строка.
+5) Не должно быть более 1 отступа.
+6) Объявление переменной в методе происходит перед тем местом, в котором она собирается использоваться.
+7) Группирование логических фрагментов: 
+  - Логические фрагменты в методе должны быть разделены пустыми строками.  
+  - Логический фрагмент не должен содержать пустых строк.
+```
+        /// <summary>
+        /// Инициализирует экземпляр <see cref="WavePlayerViewModel"/>.
+        /// </summary>
+        public WavePlayerViewModel()
+        {
+            Player = new AudioStreamPlayer();
+            Selection = new SelectionModel();
+
+            WaveFormViewModel = new WaveFormViewModel(Selection);
+
+            PlayCommand = new RelayCommand(Play, CanPlay);
+            PauseCommand = new RelayCommand(Pause, CanPause);
+
+            _adsEventBus = AdsEventBus.Instance;
+
+            InitializeEventHandlers();
+        }
+```
+8) Операции в теле (```if/else```, ```while``` и т.д) должны быть обернуты в фигурные скобки.  
+Каждая скобка на отдельной строке.  
+
+**Пример плохого кода:**
+```
+if (_player.IsPlaying)
+  _player.Pause();
+```
+**Код после форматирования:**  
+```
+if (_player.IsPlaying)
+{
+  _player.Pause();
+}
+```
+9) В каждой строке не более 2 действий.  
+
+**Пример плохого кода:**
+```
+IAudioStream searchedStream = ClipboardElementsViewModels?.ToList().First(elementVM => elementVM.AudioStream == audioStream).AudioStream.GetResultStream();
+```  
+**Код после форматирования:**  
+```
+ClipboardElementViewModel searchedViewModel = ClipboardElementsViewModels?.First(elementVM => elementVM.AudioStream == audioStream);
+IAudioStream searchedStream = searchedViewModel.AudioStream.GetResultStream();
+```
+
 ## General advices
-- Проверять и документировать код перед каждым коммитом и Merge Request-ом.
+- Проверять, документировать и чистить код перед каждым коммитом и Merge Request-ом.
 - ```DRY``` принцип (Don’t repeat yourself - не повторяйся) - В коде не должно быть повторений логики, иначе при измении логики, придется делать изменения в нескольких местах.
 - ```KISS``` принцип (Keep it simple stupid- Делай проще, тупица) - Код должен оставаться простым для понимания и дальнейшего раcширения.
 - ```YAGNI``` принцип (You aren't gonna need it - Тебе это не понадобится) - В коде не должно быть неиспользуемых строк, методов, классов, ненужной документации.
