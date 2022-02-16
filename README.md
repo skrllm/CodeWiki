@@ -123,6 +123,7 @@ IAudioStream searchedStream = ClipboardElementsViewModels?.ToList().First(elemen
 ClipboardElementViewModel searchedViewModel = ClipboardElementsViewModels?.First(elementVM => elementVM.AudioStream == audioStream);
 IAudioStream searchedStream = searchedViewModel.AudioStream.GetResultStream();
 ```
+10) Передавать в параметры метода конкретный объект, а не результат другого метода.
 
 ## General advices
 - Проверять, документировать и чистить код перед каждым коммитом и Merge Request-ом.
