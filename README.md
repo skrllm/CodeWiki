@@ -6,7 +6,7 @@
 3) Объекты должны иметь имена, которые легко произносить.  
 **```string IntervalInMilliseconds``` лучше, чем ```string IntvrlInMs```.** 
 4) Однобуквенные имена только для для локальных переменных в коротких методах.  
-```
+```c#
 private void Keyboard_KeyUp(object sender, KeyRoutedEventArgs e)
   {
     if (e.key == VirtualKey.A)
@@ -29,7 +29,7 @@ private void Keyboard_KeyUp(object sender, KeyRoutedEventArgs e)
 Метод, выполняющий одну операцию, невозможно разделить на логические секции.
 3) Содержимое метода должно находиться на одном уровне абстракций.  
 **Метод ниже выполняет операции на разных уровнях абстракций.**
-``` 
+```c# 
         /// <summary>
         /// Загружает тексты.
         /// </summary>
@@ -62,7 +62,7 @@ private void Keyboard_KeyUp(object sender, KeyRoutedEventArgs e)
 2) Необходимо обрабатывать исключения.   
 
 Недопустимо написание подобного кода:
-```
+```c#
 private void Initialize()
   {
     try
@@ -73,7 +73,7 @@ private void Initialize()
   }
 ```
 Код после форматирования:
-```
+```c#
 private void Initialize()
   {
     try
@@ -98,28 +98,28 @@ private void Initialize()
 ## Documentation rules
 1) Необходимо документировать классы, конструкторы, методы, поля, свойства и т.д.
 2) Документация классов и объектов должна отвечать на вопрос **Что это?**  
-```
+```c#
 /// <summary>
 /// Заявка на пополнение склада товарных позиций.
 /// </summary>
 public class DeliveryRequest : Entity
 ```
 3) Документация событий должна отвечать на вопрос **О чем уведомляет?**
-```
+```c#
 /// <summary>
 /// Уведомляет о прибытии поставки с новыми товарами.
 /// </summary>
 public class SupplyArrivedWithStockItemsDomainEvent : INotification
 ```
 4) Документация методов должна отвечать на вопрос **Что делает?**
-```
+```c#
 /// <summary>
 /// Возвращает ноту, если она находится по данному индексу.
 /// </summary>
 public bool TryGetNote(int noteIndex, out NoteDto note)
 ```
 5) Документация полей и свойств типа ```bool``` должна иметь тот вид, при котором на него можно ответить **Да** или **Нет**.
-```
+```c#
 /// <summary>
 /// Активно ли приложение.
 /// </summary>
@@ -148,7 +148,7 @@ public bool AppIsActive { get; set; }
 7) Группирование логических фрагментов: 
   - Логические фрагменты в методе должны быть разделены пустыми строками.  
   - Логический фрагмент не должен содержать пустых строк.
-```
+```c#
         /// <summary>
         /// Инициализирует экземпляр <see cref="WavePlayerViewModel"/>.
         /// </summary>
@@ -171,12 +171,12 @@ public bool AppIsActive { get; set; }
 Каждая скобка на отдельной строке.  
 
 **Пример плохого кода:**
-```
+```c#
 if (_player.IsPlaying)
   _player.Pause();
 ```
 **Код после форматирования:**  
-```
+```c#
 if (_player.IsPlaying)
 {
   _player.Pause();
@@ -185,11 +185,11 @@ if (_player.IsPlaying)
 9) В каждой строке не более 2 действий.  
 
 **Пример плохого кода:**
-```
+```c#
 double pointYPosition = Points?.ToList().First(point => point.x == x).Y;
 ```  
 **Код после форматирования:**  
-```
+```c#
 Point searchedPoint = Points?.First(point => point.X == X);
 double pointYPosition = searchedPoint.Y;
 ```
@@ -211,11 +211,11 @@ double pointYPosition = searchedPoint.Y;
 6)  Вместо того, чтобы получать доступ к полям объекта для выполнения определенного действия, пусть сам объект выполнит это действие.
 
 Пример плохого кода:
-```
+```c#
 decimal productPrice = ProductViewModel.Product.Price;
 ```
 Код после рефакторинга:
-```
+```c#
 decimal productPrice = ProductViewModel.GetProductPrice();
 ```
 
