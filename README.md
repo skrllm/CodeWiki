@@ -57,7 +57,7 @@ private void Keyboard_KeyUp(object sender, KeyRoutedEventArgs e)
 Если метод обрабатывает ошибки, то внутри него до и после блока ```try/catch``` не должно быть кода.
 9) Следует избегать оператора ```goto```.
 
-## Error handling rules
+## Exception handling rules
 1) Необходимо конкретизировать исключения.
 2) Необходимо обрабатывать исключения.   
 
@@ -104,10 +104,10 @@ private void Initialize()
 /// </summary>
 public class DeliveryRequest : Entity
 ```
-3) Документация событий должна отвечать на вопрос **О чем уведомляет?**
+3) Документация событий должна отвечать на вопрос **Что произошло?**
 ```c#
 /// <summary>
-/// Уведомляет о прибытии поставки с новыми товарами.
+/// Пришла поставка с новыми товарами.
 /// </summary>
 public class SupplyArrivedWithStockItemsDomainEvent : INotification
 ```
